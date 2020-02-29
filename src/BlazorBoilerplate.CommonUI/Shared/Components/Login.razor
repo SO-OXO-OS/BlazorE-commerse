@@ -1,0 +1,34 @@
+﻿@using Microsoft.AspNetCore.Components
+@inject NavigationManager navigationManager
+@inject AuthenticationStateProvider authStateProvider
+
+<AuthorizeView Context="AuthorizeContext">
+    <Authorized>
+        <MatTooltip Tooltip="Logout">
+            <MatIconButton Icon="exit_to_app" RefBack="@context" OnClick="LogoutClick"></MatIconButton>
+        </MatTooltip>
+    </Authorized>
+    <NotAuthorized>
+        <!--!-->
+        <li class="list-inline-item">
+            <NavLink Href="@navigationManager.ToAbsoluteUri("account/login").AbsoluteUri">Login</NavLink>
+        </li>
+        <li class="list-inline-item">
+            <!--!-->
+            <!--!--><NavLink Href="@navigationManager.ToAbsoluteUri("account/register").AbsoluteUri" class="active">Register</NavLink><!--!-->
+        </li><!--!-->
+        <li class="list-inline-item">
+            <!--!-->
+            <!--!--><NavLink Href="@navigationManager.ToAbsoluteUri("contact").AbsoluteUri">Contact</NavLink><!--!-->
+        </li><!--!-->
+        <!--!-->
+    </NotAuthorized>
+</AuthorizeView>
+
+@code {
+    async Task LogoutClick()
+    {
+        await ((IdentityAuthenticationStateProvider)authStateProvider).Logout();
+        navigationManager.NavigateTo("/account/login");
+    }
+}

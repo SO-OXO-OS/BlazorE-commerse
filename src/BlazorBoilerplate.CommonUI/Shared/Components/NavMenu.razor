@@ -1,0 +1,70 @@
+@using Microsoft.AspNetCore.Components;
+@inject NavigationManager navigationManager
+
+<nav class="navbar navbar-expand-lg">
+    <div class="container">
+        <NavLink href="/" Match="NavLinkMatch.All" class="navbar-brand home"><img src="img/logo.png" alt="Obaju logo" class="d-none d-md-inline-block"><img src="img/logo-small.png" alt="Obaju logo" class="d-inline-block d-md-none"><span class="sr-only">Obaju - go to homepage</span></NavLink>
+        <div class="navbar-buttons">
+            <button type="button" data-toggle="collapse" data-target="#navigation" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle navigation</span><i class="fa fa-align-justify"></i></button>
+
+            <button type="button" data-toggle="collapse" data-target="#search" class="btn btn-outline-secondary navbar-toggler"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></button>
+
+            <a href="basket.html" class="btn btn-outline-secondary navbar-toggler"><i class="fa fa-shopping-cart"></i></a>
+        </div>
+        <div id="navigation" class="collapse navbar-collapse">
+            <ul class="navbar-nav mr-auto"> 
+                <li class="nav-item"><NavLink class="nav-link" href="@navigationManager.ToAbsoluteUri(" ").AbsoluteUri">Home</NavLink></li>      
+                <AuthorizeView>
+                    <li class="nav-item"><NavLink class="nav-link" href="@navigationManager.ToAbsoluteUri("account").AbsoluteUri">Account</NavLink></li>
+                </AuthorizeView>
+                
+            </ul>
+
+            <div class="navbar-buttons d-flex justify-content-end">
+                <!-- /.nav-collapse-->
+
+                <div id="search-not-mobile" class="navbar-collapse collapse"></div><a data-toggle="collapse" href="#search" class="btn navbar-btn btn-primary d-none d-lg-inline-block"><span class="sr-only">Toggle search</span><i class="fa fa-search"></i></a>
+                <div id="basket-overview" class="navbar-collapse collapse d-none d-lg-block"><NavLink href="/basket" class="btn btn-primary navbar-btn"><i class="fa fa-shopping-cart"></i><span>3 items in cart</span></NavLink></div>
+            </div>
+        </div>
+    </div>
+</nav>
+<div id="search" class="collapse">
+    <div class="container">
+        <form role="search" class="ml-auto">
+            <div class="input-group">
+                @*<MatAutocompleteList TItem="ProductModel" CustomStringSelector="@(x=>x.Name)" type="text" placeholder="Search" class="form-control" Items="@products" @bind-Value="@product">
+                    <div style="display: flex; flex-direction: row; width: 100%;">
+                        <div style="flex: 1;">@product.Name</div>
+                    </div>
+                </MatAutocompleteList>
+
+                <NavLink href="" class="btn btn-primary" @onclick="@NavigateToProductDetail"><i class="fa fa-search"></i></NavLink>*@
+
+            </div>
+        </form>
+    </div>
+</div>
+
+@code {
+    public bool IsLoggedIn = false;
+    [CascadingParameter]
+    Task<AuthenticationState> authenticationStateTask { get; set; }
+
+    protected override async Task OnParametersSetAsync()
+    {
+        IsLoggedIn = false;
+        var user = (await authenticationStateTask).User;
+
+        if (user.Identity.IsAuthenticated)
+        {
+            IsLoggedIn = true;
+        }
+
+        //https://gist.github.com/SteveSandersonMS/175a08dcdccb384a52ba760122cd2eda Examples
+        //if (user.IsInRole("Admin"))
+        //{
+        // Perform some action only available to users in the 'admin' role
+        //}
+    }
+}
