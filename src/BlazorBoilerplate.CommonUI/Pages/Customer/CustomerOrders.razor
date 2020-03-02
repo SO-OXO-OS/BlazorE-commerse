@@ -1,0 +1,77 @@
+﻿@page "/customerorders"
+@inject NavigationManager NavigationManager
+@attribute [Authorize]
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <!-- breadcrumb-->
+            <nav aria-label="breadcrumb">
+                <ol class="breadcrumb">
+                    <li class="breadcrumb-item"><a href="#">Home</a></li>
+                    <li aria-current="page" class="breadcrumb-item active">My orders</li>
+                </ol>
+            </nav>
+        </div>
+        <div class="col-lg-3">
+            <!--
+            *** CUSTOMER MENU ***
+            _________________________________________________________
+            -->
+            <CustomerSection />
+
+            <!-- /.col-lg-3-->
+            <!-- *** CUSTOMER MENU END ***-->
+        </div>
+        <div id="customer-orders" class="col-lg-9">
+            <div class="box">
+                <h1>My orders</h1>
+                <p class="lead">Your orders on one place.</p>
+                <p class="text-muted">If you have any questions, please feel free to <a href="contact.html">contact us</a>, our customer service center is working for you 24/7.</p>
+                <hr>
+                <div class="table-responsive">
+                    <table class="table table-hover">
+                        <thead>
+                            <tr>
+                                <th>Order</th>
+                                <th>Date</th>
+                                <th>Total</th>
+                                <th>Status</th>
+                                <th>Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @if (ordersByUserIdResultDtos != null)
+                            {
+                                foreach (var order in ordersByUserIdResultDtos)
+                                {
+                                    <tr>
+                                        <th># @order.OrderNo</th>
+                                        <td>@order.CreationTime</td>
+                                        <td>$ @order.Total</td>
+                                        <td><span class="badge badge-info">@order.OrderStatus</span></td>
+                                        <td><a @onclick="@(()=>NavigateToCustomerOrder(order.OrderNo))" class="btn btn-primary btn-sm">View</a></td>
+                                    </tr>
+                                }
+                            }
+
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+@code{
+    List<OrdersByUserIdResultDto> ordersByUserIdResultDtos=new List<OrdersByUserIdResultDto>();
+
+    protected override void OnInitialized()
+    {
+        //var userId = await localStorage.GetItemAsync<long>("loginUserId");
+        //ordersByUserIdResultDtos = await OrderService.GetOrdersByUserId(userId);
+    }
+    private void NavigateToCustomerOrder(int orderId)
+    {
+        //NavigationManager.NavigateTo("/CustomerOrder/" + orderId);
+    }
+}

@@ -17,8 +17,8 @@ namespace BlazorBoilerplate.Server.Services
     public interface IApiLogService
     {
         Task Log(ApiLogItem apiLogItem);
-        Task<ApiResponse> Get();
-        Task<ApiResponse> GetByApplictionUserId(Guid applicationUserId);
+        ApiResponse Get();
+        ApiResponse GetByApplictionUserId(Guid applicationUserId);
     }
 
     public class ApiLogService : IApiLogService
@@ -81,12 +81,12 @@ namespace BlazorBoilerplate.Server.Services
             }
         }
 
-        public async Task<ApiResponse> Get()
+        public  ApiResponse Get()
         {
             return new ApiResponse(200, "Retrieved Api Log", _autoMapper.ProjectTo<ApiLogItemDto>(_db.ApiLogs));
         }
 
-        public async Task<ApiResponse> GetByApplictionUserId(Guid applicationUserId)
+        public ApiResponse GetByApplictionUserId(Guid applicationUserId)
         {
             try
             {

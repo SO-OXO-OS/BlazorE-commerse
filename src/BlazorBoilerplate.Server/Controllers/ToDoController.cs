@@ -25,21 +25,21 @@ namespace BlazorBoilerplate.Server.Controllers
         // GET: api/Todo
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ApiResponse> Get()
+        public ApiResponse Get()
         {
-            return await _todoService.Get();
+            return  _todoService.Get();
         }
                 
         // GET: api/Todo/5
         [HttpGet("{id}")]
         [AllowAnonymous]
-        public async Task<ApiResponse> Get(int id)
+        public ApiResponse Get(int id)
         {
             if (!ModelState.IsValid)
             {
                 return new ApiResponse(400, "Todo Model is Invalid");
             }
-            return await _todoService.Get(id);
+            return  _todoService.Get(id);
         }
                 
         // POST: api/Todo

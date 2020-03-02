@@ -22,17 +22,17 @@ namespace BlazorBoilerplate.Server.Controllers
         // GET: api/ApiLog
         [HttpGet]
         [AllowAnonymous]
-        public async Task<ApiResponse> Get()
+        public ApiResponse Get()
         {
-            return await _apiLogService.Get();
+            return  _apiLogService.Get();
         }
 
         // GET: api/ApiLog/ApplicationUserId
         [HttpGet("[action]")]
         [Authorize(Policy = Policies.IsAdmin)]
-        public async Task<ApiResponse> GetByApplicationUserId(string userId)
+        public ApiResponse GetByApplicationUserId(string userId)
         {
-            return await _apiLogService.GetByApplictionUserId(new Guid(userId));
+            return  _apiLogService.GetByApplictionUserId(new Guid(userId));
         }
     }
 }

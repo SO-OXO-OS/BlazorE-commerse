@@ -16,6 +16,27 @@ namespace BlazorBoilerplate.Server.Data.Mapping
             CreateMap<UserProfile, UserProfileDto>().ReverseMap();
             CreateMap<ApiLogItem, ApiLogItemDto>().ReverseMap();
             CreateMap<Message, MessageDto>().ReverseMap();
+
+            CreateMap<Cargo, CargoDto>().ReverseMap();
+            CreateMap<Country,CountryDto>().ReverseMap();
+            CreateMap<Payment,PaymentDto>().ReverseMap();
+            CreateMap<State,StateDto>().ReverseMap();
+            CreateMap<CategoryDto, Category>().ReverseMap();
+            CreateMap<CreateCategoryDto, Category>();
+
+            CreateMap<OrderDto, Order>();
+            CreateMap<CreateOrderDto, Order>();
+
+            CreateMap<OrderProductDto, OrderProduct>();
+            CreateMap<CreateOrderProductDto, OrderProduct>();
+
+            CreateMap<ProductDto, Product>();
+            CreateMap<CreateProductDto, Product>();
+
+            CreateMap<UserAddressDto, UserAddress>();
+            CreateMap<CreateUserAddressDto, UserAddress>();
+
+
         }
     }
 }

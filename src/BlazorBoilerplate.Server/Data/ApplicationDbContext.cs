@@ -19,7 +19,15 @@ namespace BlazorBoilerplate.Server.Data
         public DbSet<UserProfile> UserProfiles { get; set; }
         public DbSet<Todo> Todos { get; set; }
         public DbSet<Message> Messages { get; set; }
-
+        public DbSet<Cargo> Cargos { get; set; }
+        public DbSet<State> States { get; set; }
+        public DbSet<Category> Categories { get; set; }
+        public DbSet<Country> Countries { get; set; }
+        public DbSet<Order> Orders { get; set; }
+        public DbSet<OrderProduct> OrderProducts { get; set; }
+        public DbSet<Payment> Payments { get; set; }
+        public DbSet<Product> Products { get; set; }
+        public DbSet<UserAddress> UserAddresses { get; set; }
         private IUserSession _userSession { get; set; }
 
         public ApplicationDbContext(DbContextOptions<ApplicationDbContext> options) : base(options)
@@ -78,9 +86,9 @@ namespace BlazorBoilerplate.Server.Data
                     //}
                     //else
                     //{
-                        // softdeletable
-                        var method = SetGlobalQueryForSoftDeleteMethodInfo.MakeGenericMethod(t);
-                        method.Invoke(this, new object[] { modelBuilder });
+                    // softdeletable
+                    var method = SetGlobalQueryForSoftDeleteMethodInfo.MakeGenericMethod(t);
+                    method.Invoke(this, new object[] { modelBuilder });
                     //}
                 }
             }

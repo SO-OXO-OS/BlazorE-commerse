@@ -77,8 +77,7 @@ namespace BlazorBoilerplate.Server
             var useSqlServer = Convert.ToBoolean(Configuration["BlazorBoilerplate:UseSqlServer"] ?? "false");
             var dbConnString = useSqlServer
                 ? Configuration.GetConnectionString("DefaultConnection")
-                : $"Filename={Configuration.GetConnectionString("SqlLiteConnectionFileName")}";
-
+                : $"Filename={Configuration.GetConnectionString("SqlLiteConnectionFileName")}";            
             var authAuthority = Configuration["BlazorBoilerplate:IS4ApplicationUrl"].TrimEnd('/');
 
             void DbContextOptionsBuilder(DbContextOptionsBuilder builder)
@@ -354,6 +353,8 @@ namespace BlazorBoilerplate.Server
             services.AddTransient<IApiLogService, ApiLogService>();
             services.AddTransient<ITodoService, ToDoService>();
             services.AddTransient<IMessageService, MessageService>();
+            services.AddTransient<ICategoryService, CategoryService>();
+            services.AddTransient<IOrderProductService, OrderProductService>();
 
             // DB Creation and Seeding
             services.AddTransient<IDatabaseInitializer, DatabaseInitializer>();
@@ -387,8 +388,7 @@ namespace BlazorBoilerplate.Server
             services.AddScoped<HttpClient>();
 
             services.AddRazorPages();
-            services.AddServerSideBlazor();
-
+            services.AddServerSideBlazor();            
             // Authentication providers
 
             Log.Logger.Debug("Removing AuthenticationStateProvider...");
@@ -420,7 +420,7 @@ namespace BlazorBoilerplate.Server
                 var databaseInitializer = serviceScope.ServiceProvider.GetService<IDatabaseInitializer>();
                 databaseInitializer.SeedAsync().Wait();
             }
-
+          
             app.UseResponseCompression(); // This must be before the other Middleware if that manipulates Response
 
             // A REST API global exception handler and response wrapper for a consistent API
@@ -438,11 +438,10 @@ namespace BlazorBoilerplate.Server
             {
                 // The default HSTS value is 30 days. You may want to change this for production scenarios, see https://aka.ms/aspnetcore-hsts.
                 //    app.UseHsts(); //HSTS Middleware (UseHsts) to send HTTP Strict Transport Security Protocol (HSTS) headers to clients.
-            }
-
+            }            
             app.UseHttpsRedirection();
             app.UseStaticFiles();
-
+     
 #if ClientSideBlazor
             //app.UseClientSideBlazorFiles<Client.Program>();
 #endif

@@ -11,7 +11,7 @@ namespace BlazorBoilerplate.Server.Services
 {
     public interface IUserProfileService
     {
-        Task<ApiResponse> Get(Guid userId);
+        ApiResponse Get(Guid userId);
         Task<ApiResponse> Upsert(UserProfileDto userProfile);
         string GetLastPageVisited(string userName);
     }
@@ -42,7 +42,7 @@ namespace BlazorBoilerplate.Server.Services
             return lastPageVisited;
         }
 
-        public async Task<ApiResponse> Get(Guid userId)
+        public ApiResponse Get(Guid userId)
         {
             var profileQuery = from userProf in _db.UserProfiles
                                where userProf.UserId == userId

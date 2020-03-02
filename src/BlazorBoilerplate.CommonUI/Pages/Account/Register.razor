@@ -4,43 +4,45 @@
 @inject NavigationManager navigationManager
 @inject AuthenticationStateProvider authStateProvider
 @inject IMatToaster matToaster
-<div class="col-md-12">
-    <div class="box">
+<div class="container">
+    <div class="row">
+        <div class="col-lg-12">
+            <div class="box">
+                <MatCard>
+                    <div class="logo">
+                        <img src="/img/logo.png" style="width:100px;" /><br />
+                        <br />
+                        <h4>Create Account</h4>
+                    </div>
 
-
-        <MatCard>
-            <div class="logo">
-                <img src="/img/logo.png" style="width:100px;" /><br />
-                <br />
-                <h4>Create Account</h4>
+                    <EditForm Model="@registerParameters" OnValidSubmit="@RegisterUser">
+                        <DataAnnotationsValidator />
+                        <ValidationSummary />
+                        <fieldset>
+                            <div class="form-group">
+                                <MatTextField @bind-Value="@registerParameters.UserName" Label="User Name" Icon="person" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
+                            </div>
+                            <div class="form-group">
+                                <MatTextField @bind-Value="@registerParameters.Email" Label="Email" Icon="mail_outline" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
+                            </div>
+                            <div class="form-group">
+                                <MatTextField @bind-Value="@registerParameters.Password" Label="Password" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true" Type="password"></MatTextField>
+                            </div>
+                            <div class="form-group">
+                                <MatTextField @bind-Value="@registerParameters.PasswordConfirm" Label="Password Confirmation" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true" Type="password"></MatTextField>
+                            </div>
+                            <div class="form-group d-flex justify-content-end">
+                                <MatButton Type="submit" Raised="true">Create account</MatButton>
+                            </div>
+                            <hr />
+                            <NavLink href="account/login">
+                                <h6 class="font-weight-normal text-center">Already have an account? Click here to login</h6>
+                            </NavLink>
+                        </fieldset>
+                    </EditForm>
+                </MatCard>
             </div>
-
-            <EditForm Model="@registerParameters" OnValidSubmit="@RegisterUser">
-                <DataAnnotationsValidator />
-                <ValidationSummary />
-                <fieldset>
-                    <div class="form-group">
-                        <MatTextField @bind-Value="@registerParameters.UserName" Label="User Name" Icon="person" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
-                    </div>
-                    <div class="form-group">
-                        <MatTextField @bind-Value="@registerParameters.Email" Label="Email" Icon="mail_outline" IconTrailing="true" FullWidth="true" Required="true"></MatTextField>
-                    </div>
-                    <div class="form-group">
-                        <MatTextField @bind-Value="@registerParameters.Password" Label="Password" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true" Type="password"></MatTextField>
-                    </div>
-                    <div class="form-group">
-                        <MatTextField @bind-Value="@registerParameters.PasswordConfirm" Label="Password Confirmation" Icon="lock_outline" IconTrailing="true" FullWidth="true" Required="true" Type="password"></MatTextField>
-                    </div>
-                    <div class="form-group d-flex justify-content-end">
-                        <MatButton Type="submit" Raised="true">Create account</MatButton>
-                    </div>
-                    <hr />
-                    <NavLink href="account/login">
-                        <h6 class="font-weight-normal text-center">Already have an account? Click here to login</h6>
-                    </NavLink>
-                </fieldset>
-            </EditForm>
-        </MatCard>
+        </div>
     </div>
 </div>
 

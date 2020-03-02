@@ -87,7 +87,7 @@ namespace BlazorBoilerplate.CommonUI.Hubs
         /// <summary>
         /// Name of the chatter
         /// </summary>
-        private readonly string _username;
+        private string _username="";
 
         /// <summary>
         /// Flag to show if started

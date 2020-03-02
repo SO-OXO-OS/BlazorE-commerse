@@ -5,18 +5,26 @@
 @inject HttpClient Http
 @inject AuthenticationStateProvider authStateProvider
 @inject IMatToaster matToaster
-<MatCard>
-    <div class="logo">
-        <img src="_content/BlazorBoilerplate.CommonUI/images/blazorboilerplate.svg" style="width:100px;" /><br />Blazor Boilerplate
-        <br />
-        <h4>External authentication error</h4>
-        <h4>@errorText</h4>
-        <h5>@Description</h5>
-        <MatButton Link="/" Raised="true">Home</MatButton>
 
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-12">
+                <div class="row" id="error-page">
+                    <div class="col-md-6 mx-auto">
+                        <div class="box text-center py-5">
+                            <p class="text-center"><img alt="Obaju template" src="img/logo.png"></p>
+                            <h3>External authentication error</h3>
+                            <p>@errorText</p>
+                            <p>@Description</p>                            
+                            <p class="buttons"><NavLink class="btn btn-primary" href="/"><i class="fa fa-home"></i> Go to Homepage</NavLink></p>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
     </div>
     
-</MatCard>
+
 
 @code {
 

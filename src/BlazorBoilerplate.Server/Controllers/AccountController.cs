@@ -505,7 +505,7 @@ namespace BlazorBoilerplate.Server.Controllers
 
         [HttpGet("ListRoles")]
         [Authorize]
-        public async Task<ApiResponse> ListRoles()
+        public ApiResponse ListRoles()
         {
             var roleList = _roleManager.Roles.Select(x => x.Name).ToList();
             return new ApiResponse(200, "", roleList);

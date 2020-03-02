@@ -11,8 +11,8 @@ namespace BlazorBoilerplate.Server.Services
 {
     public interface ITodoService
     {
-        Task<ApiResponse> Get();
-        Task<ApiResponse> Get(long id);
+        ApiResponse Get();
+        ApiResponse Get(long id);
         Task<ApiResponse> Create(TodoDto todo);
         Task<ApiResponse> Update(TodoDto todo);
         Task<ApiResponse> Delete(long id);
@@ -28,8 +28,8 @@ namespace BlazorBoilerplate.Server.Services
             _autoMapper = autoMapper;
         }
 
-        public async Task<ApiResponse> Get()
-        {
+        public ApiResponse Get()
+        {            
             try
             {
                 //Todo Shadow Property doesn't allow filter of IsDeleted here?
@@ -41,7 +41,7 @@ namespace BlazorBoilerplate.Server.Services
             }
         }
 
-        public async Task<ApiResponse> Get(long id)
+        public ApiResponse Get(long id)
         {
             Todo todo = _db.Todos.FirstOrDefault(t => t.Id == id);
             if (todo != null)

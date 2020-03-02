@@ -29,10 +29,10 @@ namespace BlazorBoilerplate.Server.Controllers
 
         // GET: api/UserProfile
         [HttpGet("Get")]
-        public async Task<ApiResponse> Get()
+        public ApiResponse Get()
         {
             Guid userId = new Guid(_httpContextAccessor.HttpContext.User.FindFirst(JwtClaimTypes.Subject).Value);
-            return await _userProfileService.Get(userId);
+            return  _userProfileService.Get(userId);
         }
 
         // POST: api/UserProfile
